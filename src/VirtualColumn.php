@@ -87,6 +87,8 @@ trait VirtualColumn
         if ('deleted' === $event) {
             self::encodeAttributes($this);
         }
+        
+        $result = parent::fireModelEvent($event, $halt);
 
         $this->runAfterListeners($event, $halt);
 
