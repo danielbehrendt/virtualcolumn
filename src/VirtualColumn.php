@@ -84,7 +84,9 @@ trait VirtualColumn
     {
         $this->decodeIfEncoded();
 
-        $result = ('deleted' !== $event) ? parent::fireModelEvent($event, $halt) : null;
+        if ('deleted' === $event) {
+            self::encodeAttributes($this);
+        }
 
         $this->runAfterListeners($event, $halt);
 
